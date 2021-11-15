@@ -196,3 +196,13 @@ def test_forward_labeled_transitions(pt):
     model = build_model(pt, '--no_transition_embedding_labels')
     run_forward_checks(model)
     
+def test_forward_partitioned_attention(pt):
+    """
+    Test with & without partitioned attention layers
+    """
+    model = build_model(pt, '--pattn_num_heads', '8', '--pattn_num_layers', '8')
+    run_forward_checks(model)
+
+    model = build_model(pt, '--pattn_num_heads', '0', '--pattn_num_layers', '0')
+    run_forward_checks(model)
+    
